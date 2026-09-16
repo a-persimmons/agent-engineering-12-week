@@ -1,6 +1,6 @@
 # Agent 工程实践 · 12 周学习路线
 
-中文自学课程网站，包含准备课、12 周课程、73 个知识点、22 张概念图、22 个 Python 示例、按日任务、验收与官方参考资料。
+中文自学课程网站，包含准备课、12 周课程、73 节讲义、22 张概念图、22 个 Python 示例、按日任务、验收与官方参考资料。
 
 ## 文件
 
@@ -46,4 +46,15 @@ python -m http.server 8000 --directory dist
 
 生成的课程数据、SVG 与 ZIP 不重复提交，由 `content/course.py` 和 `content/diagrams.py` 统一生成。页面使用相对资源路径，支持 GitHub Pages 的仓库子路径。
 
-修改课程请编辑 `content/course.py`，修改配图请编辑 `content/diagrams.py`；修改界面请编辑 `dist/index.html`、`dist/style.css`、`dist/app.js`。提交这些源文件即可更新网站。
+修改课程请编辑 `content/course.py`，修改讲义导入、推演与练习请编辑 `content/lectures.py`，修改配图请编辑 `content/diagrams.py`；修改界面请编辑 `dist/index.html`、`dist/style.css`、`dist/app.js`。提交这些源文件即可更新网站。
+
+
+## 讲义内容与阅读方式
+
+准备课和 12 周课程均按“问题导入 → 分节讲解与案例推演 → 图解 → 代码阅读指引 → 小结 → 迁移练习”组织。节内目录可直接跳转；原来的 `#week-N/concepts` 链接继续有效。
+
+- `content/course.py`：原理说明、带中文注释的 Python 示例、任务和验收。
+- `content/lectures.py`：13 份讲义的导入、73 节案例推演、代码阅读指引与练习解析。
+- `dist/handouts/week-NN.md`：构建时生成的 Markdown 讲义，含正文、示例与运行说明。
+
+页面与 Markdown 共用课程数据。离线查看 Markdown 中的图时，需要同时保留 `dist/diagrams/`；运行示例请使用逐周代码包中的配套文件和依赖。

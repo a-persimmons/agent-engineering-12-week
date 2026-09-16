@@ -1386,6 +1386,8 @@ def build():
         allfiles.extend(f for f in weekdir.iterdir() if f.is_file())
     from diagrams import attach_diagrams
     attach_diagrams(COURSE, out)
+    from lectures import attach_lectures
+    attach_lectures(COURSE, out)
     (out/'course.js').write_text('const COURSE = '+json.dumps(COURSE,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
     with zipfile.ZipFile(out/'examples.zip','w',zipfile.ZIP_DEFLATED) as archive:
         for file in allfiles: archive.write(file,arcname=file.relative_to(examples).as_posix())

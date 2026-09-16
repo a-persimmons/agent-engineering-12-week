@@ -16,6 +16,15 @@ for file in ROOT.rglob('*.py'):
 for file in (ROOT / 'diagrams').glob('*.svg'):
     ElementTree.parse(file)
 for week in course:
+    lecture = week['lecture']
+    handout = ROOT / lecture['path']
+    assert handout.is_file(), lecture['path']
+    markdown = handout.read_text(encoding='utf-8')
+    assert lecture['question'] in markdown and lecture['answer'] in markdown
+    for chapter in week['concepts']:
+        assert chapter['discussion'] and chapter['discussion'] in markdown
+        if chapter.get('diagram'):
+            assert (ROOT / chapter['diagram']['src']).is_file()
     for example in week['examples'] + week.get('support', []):
         assert (ROOT / example['path']).is_file(), example['path']
     with ZipFile(ROOT / 'examples' / f"week-{week['id']:02d}.zip") as archive:
@@ -23,4 +32,4 @@ for week in course:
 with ZipFile(ROOT / 'examples.zip') as archive:
     assert archive.testzip() is None
 assert len(list((ROOT / 'diagrams').glob('*.svg'))) == 22
-print('Validated 13 lessons, 22 diagrams, Python syntax and all download archives.')
+print('Validated 13 lectures and Markdown handouts, 73 chapters, 22 diagrams, Python syntax and all download archives.')
